@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "914337292514",
+    "project_id": "faunalencyclopedia",
+    "storage_bucket": "faunalencyclopedia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914337292514:android:df60466723f6cdc64b7ebb",
+        "android_client_info": {
+          "package_name": "com.g12.FaunalEncyclopedia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZDUnOaB9K3508zyz7Fb_3Xt3lDO4rXNs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
