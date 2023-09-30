@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:914337292514:android:df60466723f6cdc64b7ebb",
+        "mobilesdk_app_id": "1:914337292514:android:b3b90a1a13dea8d44b7ebb",
         "android_client_info": {
-          "package_name": "com.g12.FaunalEncyclopedia"
+          "package_name": "com.g12.faunalencyclopedia"
         }
       },
       "oauth_client": [],
