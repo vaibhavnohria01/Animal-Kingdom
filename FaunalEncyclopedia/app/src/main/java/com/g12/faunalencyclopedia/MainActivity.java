@@ -2,15 +2,26 @@ package com.g12.faunalencyclopedia;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,29 +30,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        // Create a storage reference from our app
-        StorageReference storageRef = storage.getReference();
-        StorageReference dataRef = storageRef.child("data/dataset.json");
+        // This is a simple demo to show how to get data
+        TextView text = findViewById(R.id.data);
 
-        dataRef.getMetadata().addOnSuccessListener(new OnSuccessListener<StorageMetadata>() {
+        DataLoader dataLoader = new DataLoader(this);
+        dataLoader.loadDataSet(new DataLoader.OnDataLoadedCallback() {
             @Override
-            public void onSuccess(StorageMetadata storageMetadata) {
-                String metadataStr = "Metadata: "
-                        + "\nBucket: " + storageMetadata.getBucket()
-                        + "\nName: " + storageMetadata.getName()
-                        + "\nPath: " + storageMetadata.getPath()
-                        + "\nSize: " + storageMetadata.getSizeBytes() + " bytes"
-                        + "\nContent Type: " + storageMetadata.getContentType()
-                        + "\nCreation Time: " + storageMetadata.getCreationTimeMillis()
-                        + "\nUpdated Time: " + storageMetadata.getUpdatedTimeMillis();
-
-                Log.d("Metadata", metadataStr);
+            public void onSuccess(List<Animal> dataset) {
+                text.setText(dataset.get(0).toString());
             }
-        }).addOnFailureListener(new OnFailureListener() {
+
             @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Uh-oh, an error occurred!
+            public void onFailure(Exception exception) {
+                // Handle error
+                text.setText("Failed to load data: " + exception.getMessage());
             }
         });
     }
