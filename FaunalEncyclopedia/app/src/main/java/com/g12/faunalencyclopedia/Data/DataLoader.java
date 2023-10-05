@@ -1,4 +1,4 @@
-package com.g12.faunalencyclopedia;
+package com.g12.faunalencyclopedia.Data;
 
 import android.content.Context;
 
@@ -30,7 +30,7 @@ public class DataLoader {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
         StorageReference dataRef = storageRef.child("data/datalist.json");
-        List<Animal> dataset = new ArrayList<>();
+        ArrayList<Animal> dataset = new ArrayList<>();
         File localFile;
         {
             try {
@@ -66,7 +66,7 @@ public class DataLoader {
     }
 
     public interface OnDataLoadedCallback {
-        void onSuccess(List<Animal> dataset);
+        void onSuccess(ArrayList<Animal> dataset);
         void onFailure(Exception exception);
     }
 }
