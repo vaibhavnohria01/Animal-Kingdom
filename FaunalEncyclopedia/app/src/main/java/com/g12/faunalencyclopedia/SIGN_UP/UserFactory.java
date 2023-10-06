@@ -1,7 +1,5 @@
 package com.g12.faunalencyclopedia.SIGN_UP;
 
-public class UserFactory {
-    public User createUser(String username){
-        return  new NewUser(username);
-    }
+public interface UserFactory {
+    User createUser(String username, String email,String password);
 }

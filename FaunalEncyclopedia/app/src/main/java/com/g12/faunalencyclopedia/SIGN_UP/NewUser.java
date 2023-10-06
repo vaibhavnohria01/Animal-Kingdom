@@ -1,14 +1,8 @@
 package com.g12.faunalencyclopedia.SIGN_UP;
 
-public class NewUser implements User{
-    private String username;
-    public NewUser(String username){
+public class NewUser implements UserFactory{
 
-        this.username = username;
-    }
-
-    @Override
-    public void signup() {
-        System.out.println("Welcome "+username+"!!");
+    public static User createUser(String username, String email, String password){
+        return new User(username, email, password);
     }
 }

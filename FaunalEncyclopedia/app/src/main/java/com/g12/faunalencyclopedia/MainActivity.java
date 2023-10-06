@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.g12.faunalencyclopedia.Data.Animal;
 import com.g12.faunalencyclopedia.Data.DataHolder;
 import com.g12.faunalencyclopedia.Data.DataLoader;
+import com.g12.faunalencyclopedia.SIGN_UP.NewUser;
+import com.g12.faunalencyclopedia.SIGN_UP.User;
+import com.g12.faunalencyclopedia.SIGN_UP.UserFactory;
 
 import java.util.ArrayList;
 
@@ -19,6 +23,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button signup = findViewById(R.id.signUp);
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserFactory newusersignup = new NewUser();
+                User newUser = NewUser.createUser("vaibhavnohria","u7532171@anu.edu.au","123456");
+            }
+        });
 
         // This is a simple demo to show how to get data
         TextView text = findViewById(R.id.data);
