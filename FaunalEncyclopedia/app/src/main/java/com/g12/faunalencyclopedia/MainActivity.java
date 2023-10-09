@@ -1,5 +1,6 @@
 package com.g12.faunalencyclopedia;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,6 +15,7 @@ import com.g12.faunalencyclopedia.Data.DataLoader;
 import com.g12.faunalencyclopedia.SIGN_UP.NewUser;
 import com.g12.faunalencyclopedia.SIGN_UP.User;
 import com.g12.faunalencyclopedia.SIGN_UP.UserFactory;
+import com.g12.faunalencyclopedia.Search.AVLTree;
 
 import java.util.ArrayList;
 
@@ -25,25 +27,33 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button signup = findViewById(R.id.signUp);
+        Button login = findViewById(R.id.login);
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 UserFactory newusersignup = new NewUser();
-                User newUser = NewUser.createUser("vaibhavnohria","u7532171@anu.edu.au","123456");
+                User newUser = newusersignup.createUser("vaibhavnohria","u7532171@anu.edu.au","123456");
+            }
+        });
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
 
         // This is a simple demo to show how to get data
-        TextView text = findViewById(R.id.data);
+        TextView text = findViewById(R.id.load);
         Button button = findViewById(R.id.toList);
 
         DataLoader dataLoader = new DataLoader(this);
         dataLoader.loadDataSet(new DataLoader.OnDataLoadedCallback() {
 
             @Override
-            public void onSuccess(ArrayList<Animal> dataset) {
-                text.setText(dataset.get(0).toString());
+            public void onSuccess(AVLTree<Animal> dataset) {
+                text.setText("Loaded");
                 DataHolder.getInstance().setDataset(dataset);
                 button.setOnClickListener(view -> {
                     Intent intent = new Intent(MainActivity.this, ListActivity.class);

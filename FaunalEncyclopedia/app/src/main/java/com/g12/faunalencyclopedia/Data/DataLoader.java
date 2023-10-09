@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.g12.faunalencyclopedia.Search.AVLTree;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -18,6 +19,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class DataLoader {
@@ -30,7 +32,8 @@ public class DataLoader {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
         StorageReference dataRef = storageRef.child("data/datalist.json");
-        ArrayList<Animal> dataset = new ArrayList<>();
+        Comparator<Animal> idComparator = Comparator.comparing(Animal::getId);
+        AVLTree<Animal> dataset = new AVLTree<>(idComparator);
         File localFile;
         {
             try {
@@ -66,7 +69,7 @@ public class DataLoader {
     }
 
     public interface OnDataLoadedCallback {
-        void onSuccess(ArrayList<Animal> dataset);
+        void onSuccess(AVLTree<Animal> dataset);
         void onFailure(Exception exception);
     }
 }

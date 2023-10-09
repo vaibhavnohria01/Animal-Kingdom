@@ -1,12 +1,12 @@
 package com.g12.faunalencyclopedia.Search;
 
-public class AVLNode {
-    String data;
+public class AVLNode<T> {
+    T data;
     int height;
-    AVLNode left;
-    AVLNode right;
+    AVLNode<T> left;
+    AVLNode<T> right;
 
-    AVLNode(String data){
+    AVLNode(T data){
         this.data = data;
         height =1;
     }

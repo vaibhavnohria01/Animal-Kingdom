@@ -1,6 +1,6 @@
 package com.g12.faunalencyclopedia.Data;
 
-import java.util.List;
+import com.g12.faunalencyclopedia.Search.AVLTree;
 
 public class DataHolder {
     private static final DataHolder ourInstance = new DataHolder();
@@ -9,16 +9,17 @@ public class DataHolder {
         return ourInstance;
     }
 
-    private List<Animal> dataset;
+    private AVLTree<Animal> dataset;
 
     private DataHolder() {
+        dataset = new AVLTree<>();
     }
 
-    public List<Animal> getDataset() {
+    public AVLTree<Animal> getDataset() {
         return dataset;
     }
 
-    public void setDataset(List<Animal> dataset) {
+    public void setDataset(AVLTree<Animal> dataset) {
         this.dataset = dataset;
     }
 }

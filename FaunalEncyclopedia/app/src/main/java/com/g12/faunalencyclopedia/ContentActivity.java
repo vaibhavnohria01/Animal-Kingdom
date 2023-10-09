@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.g12.faunalencyclopedia.Data.Animal;
 import com.g12.faunalencyclopedia.Data.DataHolder;
 import com.g12.faunalencyclopedia.AI.ViewModel;
+import com.g12.faunalencyclopedia.Search.AVLTree;
 
 
 import java.util.List;
@@ -32,15 +33,16 @@ public class ContentActivity extends AppCompatActivity {
         TextView scientificName = findViewById(R.id.scientificName);
         TextView taxonomicGroup = findViewById(R.id.taxonomicGroup);
         TextView taxonomicSubgroup = findViewById(R.id.taxonomicSubgroup);
-        List<Animal> animals = DataHolder.getInstance().getDataset();
+        AVLTree<Animal> animals = DataHolder.getInstance().getDataset();
         TextView description = findViewById(R.id.descriptionText);
         String authorization = getString(R.string.authorization);
 
         Intent intent = getIntent();
         String animalName = intent.getStringExtra("ANIMAL");
-        Optional<Animal> targetAnimal = animals.stream()
+        Optional<Animal> targetAnimal = animals.get(animal -> animal.getCommon_name().equals(animalName));
+        /*Optional<Animal> targetAnimal = animals.stream()
                 .filter(animal -> animal.getCommon_name().equals(animalName))
-                .findFirst();
+                .findFirst();*/
         if (targetAnimal.isPresent()) {
             Animal animal = targetAnimal.get();
             commonName.setText(animal.getCommon_name());
