@@ -15,6 +15,15 @@
         android:theme="@style/Theme.FaunalEncyclopedia"
         tools:targetApi="31">
         <activity
+            android:name=".signup"
+            android:exported="false" />
+        <activity
+            android:name=".SIGN_UP.signup"
+            android:exported="false" />
+        <activity
+            android:name=".main_app"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity

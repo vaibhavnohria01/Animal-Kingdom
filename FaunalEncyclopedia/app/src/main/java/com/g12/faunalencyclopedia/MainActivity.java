@@ -12,12 +12,7 @@ import android.widget.TextView;
 import com.g12.faunalencyclopedia.Data.Animal;
 import com.g12.faunalencyclopedia.Data.DataHolder;
 import com.g12.faunalencyclopedia.Data.DataLoader;
-import com.g12.faunalencyclopedia.SIGN_UP.NewUser;
-import com.g12.faunalencyclopedia.SIGN_UP.User;
-import com.g12.faunalencyclopedia.SIGN_UP.UserFactory;
 import com.g12.faunalencyclopedia.Search.AVLTree;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserFactory newusersignup = new NewUser();
-                User newUser = newusersignup.createUser("vaibhavnohria","u7532171@anu.edu.au","123456");
+                Intent intent = new Intent(MainActivity.this, com.g12.faunalencyclopedia.signup.class);
+                startActivity(intent);
             }
         });
         login.setOnClickListener(new View.OnClickListener() {
