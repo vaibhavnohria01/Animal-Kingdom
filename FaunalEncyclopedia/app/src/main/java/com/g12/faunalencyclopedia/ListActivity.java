@@ -16,24 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
-
+    // Andrew: Updating the list view when the activity resumes
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
-
+    protected void onResume(){
+        super.onResume();
+        System.out.println("Updating list");
         AVLTree<Animal> dataset = DataHolder.getInstance().getDataset();
         List<String> animalNames = new ArrayList<>();
 
-
-        /*for (Animal animal : dataset) {
-            animalNames.add(animal.getCommon_name());
-        }*/
         dataset.inorder(Animal -> {
             animalNames.add(Animal.getCommon_name());
         });
 
-        //ArrayList<Animal> dataset = (ArrayList<Animal>) getIntent().getExtras().getSerializable("DATASET");
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, animalNames);
         ListView listView = findViewById(R.id.list);
         listView.setAdapter(adapter);
@@ -43,5 +37,17 @@ public class ListActivity extends AppCompatActivity {
             intent.putExtra("ANIMAL", animalNames.get(i));
             startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_list);
+
+
+
+
+
+
     }
 }
