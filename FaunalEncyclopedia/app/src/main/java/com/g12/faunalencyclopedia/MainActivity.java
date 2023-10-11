@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.g12.faunalencyclopedia.Data.Animal;
 import com.g12.faunalencyclopedia.Data.DataHolder;
@@ -15,6 +17,39 @@ import com.g12.faunalencyclopedia.Data.DataLoader;
 import com.g12.faunalencyclopedia.Search.AVLTree;
 
 public class MainActivity extends AppCompatActivity {
+    // Andrew: Added a handler and a runnable to load data from Firebase
+    private static final long INTERVAL = 1000;
+    private Handler dataLoadingHandler = new Handler();
+    private DataLoader dataLoader = new DataLoader(this);;
+    private Runnable dataLoadingRunnable = new Runnable(){
+
+        @Override
+        public void run() {
+            System.out.println("Loading data...");
+            dataLoader.loadDataSet(new DataLoader.OnDataLoadedCallback() {
+
+                @Override
+                public void onSuccess(AVLTree<Animal> dataset) {
+                    System.out.println("Data loaded successfully");
+                    DataHolder.getInstance().setDataset(dataset);
+
+                }
+
+                @Override
+                public void onFailure(Exception exception) {
+                    Toast.makeText(MainActivity.this, "Failed to load data: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            dataLoadingHandler.postDelayed(this, INTERVAL);
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Ensure you remove any callbacks to prevent memory leaks
+        dataLoadingHandler.removeCallbacks(dataLoadingRunnable);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,28 +78,13 @@ public class MainActivity extends AppCompatActivity {
         TextView text = findViewById(R.id.load);
         Button button = findViewById(R.id.toList);
 
-        DataLoader dataLoader = new DataLoader(this);
-        dataLoader.loadDataSet(new DataLoader.OnDataLoadedCallback() {
+        dataLoadingHandler.post(dataLoadingRunnable);
 
-            @Override
-            public void onSuccess(AVLTree<Animal> dataset) {
-                text.setText("Loaded");
-                DataHolder.getInstance().setDataset(dataset);
-                button.setOnClickListener(view -> {
-                    Intent intent = new Intent(MainActivity.this, ListActivity.class);
-                    //intent.putExtra("DATASET", dataset);
-                    startActivity(intent);
-                });
-            }
-
-            @Override
-            public void onFailure(Exception exception) {
-                // Handle error
-                text.setText("Failed to load data: " + exception.getMessage());
-            }
+        button.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ListActivity.class);
+            //intent.putExtra("DATASET", dataset);
+            startActivity(intent);
         });
-
-
 
     }
 }
