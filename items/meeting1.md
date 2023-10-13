@@ -2,13 +2,16 @@
 This following is a very simple team meeting template. You should expand it based on the scope and nature of your discussion.
 
 ## Team Meeting 1 - Week 7 - 22 september 2023 (18:00-19:00)
-**Absent:** None
-<br>
-**Lead/scribe:**
+**Absent:** 
+None
+
+**Lead/scribe:** 
+Vaibhav Nohria
 
 ## Agreed Procedure
-Stand up Procedure: Introduction and knowing each other.
-- {e.g. Each team member briefly shares their progress and any roadblocks.}
+Stand up Procedure: 
+- Introduction and knowing each other.
+- Try to specific apps and content
 
 
 ## Agenda Items
@@ -21,7 +24,7 @@ Stand up Procedure: Introduction and knowing each other.
 ## Meeting Minutes
 - [Summary of the progress reports, discussions, decisions, and matters to be confirmed from the meeting.]
 - Getting to know each other 
-- What kind of apps can we build. And choose a topic
+- What kind of apps can we build. Choose a specific topic.
 
 
 ## Action Items
