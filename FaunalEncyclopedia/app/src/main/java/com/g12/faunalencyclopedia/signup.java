@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class signup extends AppCompatActivity {
@@ -59,10 +60,13 @@ public class signup extends AppCompatActivity {
     private void saveDetailsToFile(User user){
         try{
             String userData = "Username: "+user.getUsername()+"||Email: "+user.getEmail()+"||Password: "+user.getPassword();
-            String file = "user_details.txt";
-            FileOutputStream fos = openFileOutput(file, MODE_PRIVATE);
-            fos.write(userData.getBytes());
-            fos.close();
+            FileWriter myWriter = new FileWriter("user_details.txt");
+            //String file = "user_details.txt";
+            //FileOutputStream fos = openFileOutput(file, MODE_PRIVATE);
+            //fos.write(userData.getBytes());
+            //fos.close();
+            myWriter.write(userData);
+            myWriter.close();
             Toast.makeText(this, "SignUp successful!! ", Toast.LENGTH_SHORT).show();
         }catch(IOException e){
             e.printStackTrace();
