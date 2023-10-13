@@ -15,8 +15,8 @@
         android:layout_marginEnd="85dp"
         android:layout_marginBottom="65dp"
         android:ems="10"
+        android:hint="Email"
         android:inputType="text"
-        android:text="Email id"
         app:layout_constraintBottom_toTopOf="@+id/username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -31,9 +31,10 @@
         android:layout_marginTop="60dp"
         android:layout_marginEnd="86dp"
         android:ems="10"
+        android:hint="Display Name"
         android:inputType="text"
-        android:text="Desired Username"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailid" />
 
@@ -46,12 +47,14 @@
         android:layout_marginEnd="87dp"
         android:layout_marginBottom="75dp"
         android:ems="10"
-        android:hint="Password must be numeric"
+        android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/Savebutton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/username"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/Savebutton"
@@ -73,10 +76,12 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="146dp"
         android:layout_marginBottom="80dp"
-        android:text="home screen"
+        android:text="Log in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.627"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Savebutton" />
+        app:layout_constraintTop_toBottomOf="@+id/Savebutton"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

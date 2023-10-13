@@ -1,2 +1,1 @@
-user123
-password123
+comp6442@anu.edu.au,comp6442@anu.edu.au,comp6442

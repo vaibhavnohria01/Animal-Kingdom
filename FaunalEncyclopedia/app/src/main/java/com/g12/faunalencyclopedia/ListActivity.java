@@ -3,8 +3,10 @@ package com.g12.faunalencyclopedia;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.g12.faunalencyclopedia.Data.Animal;
@@ -43,5 +45,14 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+        Button bottomHistory = findViewById(R.id.bottom_history);
+
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("USERNAME");
+
+        bottomHistory.setOnClickListener(view -> {
+            Intent intentToHistory = new Intent(ListActivity.this, HistoryActivity.class);
+            startActivity(intentToHistory);
+        });
     }
 }

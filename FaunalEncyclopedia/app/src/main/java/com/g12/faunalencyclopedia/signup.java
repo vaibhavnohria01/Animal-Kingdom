@@ -40,6 +40,10 @@ public class signup extends AppCompatActivity {
                 userFactory = new NewUser();
                 User user = userFactory.createUser(Username,Email,Password);
                 saveDetailsToFile(user);
+                //Andrew: After signing up, enter the app directly
+                Intent intent = new Intent(signup.this, ListActivity.class);
+                intent.putExtra("EMAIL", user.getEmail());
+                startActivity(intent);
             }
         });
 
@@ -47,7 +51,7 @@ public class signup extends AppCompatActivity {
        home_screen.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               Intent intent = new Intent(signup.this, MainActivity.class);
+               Intent intent = new Intent(signup.this, LoginActivity.class);
                startActivity(intent);
            }
        });

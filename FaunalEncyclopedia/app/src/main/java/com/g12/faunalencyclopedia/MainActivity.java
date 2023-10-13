@@ -18,7 +18,7 @@ import com.g12.faunalencyclopedia.Search.AVLTree;
 
 public class MainActivity extends AppCompatActivity {
     // Andrew: Added a handler and a runnable to load data from Firebase
-    private static final long INTERVAL = 1000;
+    private static final long INTERVAL = 60000;
     private Handler dataLoadingHandler = new Handler();
     private DataLoader dataLoader = new DataLoader(this);;
     private Runnable dataLoadingRunnable = new Runnable(){
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Exception exception) {
                     Toast.makeText(MainActivity.this, "Failed to load data: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+
                 }
             });
             dataLoadingHandler.postDelayed(this, INTERVAL);
