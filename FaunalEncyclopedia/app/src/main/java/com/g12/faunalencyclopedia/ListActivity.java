@@ -25,6 +25,8 @@ public class ListActivity extends AppCompatActivity {
         System.out.println("Updating list");
         AVLTree<Animal> dataset = DataHolder.getInstance().getDataset();
         List<String> animalNames = new ArrayList<>();
+        Intent intent = getIntent();
+        String email = intent.getStringExtra("EMAIL");
 
         dataset.inorder(Animal -> {
             animalNames.add(Animal.getCommon_name());
@@ -35,9 +37,10 @@ public class ListActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
-            Intent intent = new Intent(ListActivity.this, ContentActivity.class);
-            intent.putExtra("ANIMAL", animalNames.get(i));
-            startActivity(intent);
+            Intent intentToContent = new Intent(ListActivity.this, ContentActivity.class);
+            intentToContent.putExtra("EMAIL", email);
+            intentToContent.putExtra("ANIMAL", animalNames.get(i));
+            startActivity(intentToContent);
         });
     }
 
@@ -48,10 +51,11 @@ public class ListActivity extends AppCompatActivity {
         Button bottomHistory = findViewById(R.id.bottom_history);
 
         Intent intent = getIntent();
-        String username = intent.getStringExtra("USERNAME");
+        String email = intent.getStringExtra("EMAIL");
 
         bottomHistory.setOnClickListener(view -> {
             Intent intentToHistory = new Intent(ListActivity.this, HistoryActivity.class);
+            intentToHistory.putExtra("EMAIL", email);
             startActivity(intentToHistory);
         });
     }
