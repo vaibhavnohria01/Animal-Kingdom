@@ -1,17 +1,27 @@
 package com.g12.faunalencyclopedia;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Arrays;
 
 public class signup extends AppCompatActivity {
 
@@ -58,18 +68,22 @@ public class signup extends AppCompatActivity {
        });
     }
     private void saveDetailsToFile(User user){
+        String userData = user.getUsername()+","+user.getEmail()+","+user.getPassword();
         try{
-            String userData = "Username: "+user.getUsername()+"||Email: "+user.getEmail()+"||Password: "+user.getPassword();
-            FileWriter myWriter = new FileWriter("user_details.txt");
-            //String file = "user_details.txt";
-            //FileOutputStream fos = openFileOutput(file, MODE_PRIVATE);
-            //fos.write(userData.getBytes());
-            //fos.close();
-            myWriter.write(userData);
-            myWriter.close();
+
+            String filepath = "C:\\Users\\vaibh\\Desktop\\user_cred.txt";
+            File csvFile = new File(getFilesDir(),filepath);
+
+            FileOutputStream fileOutputStream = new FileOutputStream(csvFile);
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
+            writer.write(userData);
+            writer.close();
+
             Toast.makeText(this, "SignUp successful!! ", Toast.LENGTH_SHORT).show();
+
         }catch(IOException e){
             e.printStackTrace();
+
             Toast.makeText(this, "SignUp Unsuccessful. Try again! ", Toast.LENGTH_SHORT).show();
         }
     }

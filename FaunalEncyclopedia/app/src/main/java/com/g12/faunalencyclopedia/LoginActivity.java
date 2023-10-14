@@ -29,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText usernameField;
     private EditText passwordField;
 
+    private Authentication_state authState;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,36 +42,15 @@ public class LoginActivity extends AppCompatActivity {
         Button buttonLogin = findViewById(R.id.login);
         Button openSignuppage = findViewById(R.id.signup);
 
+        authState = new LogoutState(this);
+
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String username = usernameField.getText().toString();
                 String password = passwordField.getText().toString();
 
-               /* if(validCredentials(username,password)){
-                    Intent intent = new Intent(LoginActivity.this, ListActivity.class);
-                    // Andrew: Let app know who is logged in
-                    intent.putExtra("USERNAME", username);
-                    startActivity(intent);
-
-                } else{
-                    Toast.makeText(LoginActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
-                }*/
-
-                // Andrew: Custom feature FB-Auth
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(LoginActivity.this, task -> {
-                    if (task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        Intent intent = new Intent(LoginActivity.this, ListActivity.class);
-                        // Andrew: Let app know who is logged in
-                        intent.putExtra("EMAIL", user.getEmail());
-                        startActivity(intent);
-                    } else {
-                        // Andrew: If sign in fails, display a message to the user.
-                        Toast.makeText(LoginActivity.this, "The password is incorrect.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                authState.handling_login(username, password);
 
             }
         });
@@ -82,42 +63,4 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private boolean validCredentials(String username, String password){
-
-        //String savedUsername = "user123";
-        //String savedPassword = "password123";
-        String savedPassword;
-
-
-        try {
-            FileInputStream fileInputStream = openFileInput("user_details.txt");
-            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-            //InputStreamReader inputStreamReader = new InputStreamReader(getResources().openRawResource(R.raw.user_details));
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-            // Andrew: Are you gonna only check one user?
-            //savedUsername = bufferedReader.readLine();
-            //savedPassword = bufferedReader.readLine();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] tokens = line.split(",");
-                if (tokens[0].equals(username) || tokens[1].equals(username)){
-                    savedPassword = tokens[2];
-                    bufferedReader.close();
-
-                    // Andrew: The username is already the same
-                    //return username.equals(savedUsername) && password.equals(savedPassword);
-                    return password.equals(savedPassword);
-                }
-            }
-
-            return false;
-
-
-        }catch (IOException e){
-            e.printStackTrace();
-            return false;
-        }
-
-    }
 }
