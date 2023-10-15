@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -29,8 +30,6 @@ public class HistoryActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String email = mAuth.getCurrentUser().getEmail();
-
-
 
         DocumentReference userDocRef = db.collection("history").document(email);
         userDocRef.get().addOnCompleteListener(task -> {
@@ -72,10 +71,37 @@ public class HistoryActivity extends AppCompatActivity {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         textName.setText(mAuth.getCurrentUser().getDisplayName());
 
+        // Clear history
+        Button clearHistory = findViewById(R.id.clearHistory);
+        clearHistory.setOnClickListener(v -> {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            FirebaseAuth auth = FirebaseAuth.getInstance();
+            String email = auth.getCurrentUser().getEmail();
+            DocumentReference userDocRef = db.collection("history").document(email);
+            userDocRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    ListView listView = findViewById(R.id.listHistory);
+                    ArrayAdapter adapter = (ArrayAdapter) listView.getAdapter();
+                    adapter.clear();
+                    onResume();
+                }
+            });
+        });
+
+        // From history to list
         Button buttonToList = findViewById(R.id.buttonToList);
         buttonToList.setOnClickListener(v -> {
             Intent intentToList = new Intent(HistoryActivity.this, ListActivity.class);
             startActivity(intentToList);
+        });
+
+        // Log out
+        Button buttonLogOut = findViewById(R.id.logOut);
+        buttonLogOut.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent intentToLogin = new Intent(HistoryActivity.this, LoginActivity.class);
+            startActivity(intentToLogin);
         });
     }
 }

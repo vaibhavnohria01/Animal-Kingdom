@@ -56,4 +56,24 @@
         android:layout_height="488dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_history2"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/clearHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="4dp"
+        android:text="Clear History"
+        app:layout_constraintBottom_toTopOf="@+id/listHistory"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/logOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="49dp"
+        android:layout_marginBottom="4dp"
+        android:text="Log out"
+        app:layout_constraintBottom_toTopOf="@+id/listHistory"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
