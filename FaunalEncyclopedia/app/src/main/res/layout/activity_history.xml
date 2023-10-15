@@ -6,4 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".HistoryActivity">
 
+    <Button
+        android:id="@+id/bottom_history2"
+        android:layout_width="204dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="204dp"
+        android:background="@color/white"
+        android:backgroundTint="#FFFFFF"
+        android:text="History"
+        app:cornerRadius="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonToList"
+        android:layout_width="204dp"
+        android:layout_height="85dp"
+        android:background="@color/white"
+        android:backgroundTint="#FFFFFF"
+        android:text="List"
+        app:cornerRadius="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="97dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="64dp"
+        android:text="Welcome"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="140dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="64dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/listHistory"
+        android:layout_width="410dp"
+        android:layout_height="488dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_history2"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

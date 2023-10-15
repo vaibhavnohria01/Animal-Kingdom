@@ -1,5 +1,6 @@
 package com.g12.faunalencyclopedia;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,13 +15,21 @@ import com.g12.faunalencyclopedia.Data.Animal;
 import com.g12.faunalencyclopedia.Data.DataHolder;
 import com.g12.faunalencyclopedia.AI.ViewModel;
 import com.g12.faunalencyclopedia.Search.AVLTree;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 public class ContentActivity extends AppCompatActivity {
     private ViewModel viewModel;
@@ -39,12 +48,15 @@ public class ContentActivity extends AppCompatActivity {
         AVLTree<Animal> animals = DataHolder.getInstance().getDataset();
         TextView description = findViewById(R.id.descriptionText);
         String authorization = getString(R.string.authorization);
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.enableNetwork();
 
         // Search data from the AVL tree
         Intent intent = getIntent();
         String animalName = intent.getStringExtra("ANIMAL");
-        String email = intent.getStringExtra("EMAIL");
+        //FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         Optional<Animal> targetAnimal = animals.get(animal -> animal.getCommon_name().equals(animalName));
         /*Optional<Animal> targetAnimal = animals.stream()
                 .filter(animal -> animal.getCommon_name().equals(animalName))
@@ -59,14 +71,31 @@ public class ContentActivity extends AppCompatActivity {
             // Store data to the FireStore
             // Reference: https://firebase.google.com/docs/firestore/quickstart?authuser=0&_gl=1*1f5szli*_ga*MTE5MDAyNTI2Ni4xNjk3MjQzOTc5*_ga_CW55HF8NVT*MTY5NzI0Mzk3OS4xLjEuMTY5NzI0NDAwMi4zNy4wLjA.#java
             Map<String, Object> visited = new HashMap<>();
-            visited.put(email, animal);
+            visited.put(animal.getCommon_name(), 1);
+            System.out.println("Start uploading data...");
 
-            db.collection("history").document(email).update(visited);
-            System.out.println("History uploaded");
+            db.collection("history").document(email).set(visited, SetOptions.merge())
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            System.out.println("DocumentSnapshot successfully updated!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            System.out.println("Error updating document: " + e.getMessage());
+                        }
+                    });
+
+
+
+
         }
 
         button.setOnClickListener(view -> {
             Intent intentBack = new Intent(ContentActivity.this, ListActivity.class);
+            //intentBack.putExtra("EMAIL", email);
             startActivity(intentBack);
         });
 

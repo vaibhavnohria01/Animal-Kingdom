@@ -3,7 +3,6 @@ package com.g12.faunalencyclopedia;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,8 +11,8 @@ import android.widget.ListView;
 import com.g12.faunalencyclopedia.Data.Animal;
 import com.g12.faunalencyclopedia.Data.DataHolder;
 import com.g12.faunalencyclopedia.Search.AVLTree;
+import com.google.firebase.auth.FirebaseAuth;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +24,8 @@ public class ListActivity extends AppCompatActivity {
         System.out.println("Updating list");
         AVLTree<Animal> dataset = DataHolder.getInstance().getDataset();
         List<String> animalNames = new ArrayList<>();
-        Intent intent = getIntent();
-        String email = intent.getStringExtra("EMAIL");
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String email = mAuth.getCurrentUser().getEmail();
 
         dataset.inorder(Animal -> {
             animalNames.add(Animal.getCommon_name());
@@ -38,7 +37,7 @@ public class ListActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
             Intent intentToContent = new Intent(ListActivity.this, ContentActivity.class);
-            intentToContent.putExtra("EMAIL", email);
+            //intentToContent.putExtra("EMAIL", email);
             intentToContent.putExtra("ANIMAL", animalNames.get(i));
             startActivity(intentToContent);
         });
@@ -50,12 +49,10 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
         Button bottomHistory = findViewById(R.id.bottom_history);
 
-        Intent intent = getIntent();
-        String email = intent.getStringExtra("EMAIL");
 
         bottomHistory.setOnClickListener(view -> {
             Intent intentToHistory = new Intent(ListActivity.this, HistoryActivity.class);
-            intentToHistory.putExtra("EMAIL", email);
+            //intentToHistory.putExtra("EMAIL", email);
             startActivity(intentToHistory);
         });
     }
