@@ -5,7 +5,9 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
+/**
+ * @author UID:u7630167 Name: Yihang Zhu
+ */
 public class Client {
     private static final String BASE_URL = "https://api.openai.com/";
     private static Api instance;

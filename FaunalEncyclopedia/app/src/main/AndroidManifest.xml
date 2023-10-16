@@ -20,12 +20,6 @@
             android:name=".HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".Homepage"
-            android:exported="false" />
-        <activity
-            android:name=".MainApp"
-            android:exported="false" />
-        <activity
             android:name=".signup"
             android:exported="false" />
         <activity
@@ -38,7 +32,7 @@
             android:name=".ListActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Homepage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

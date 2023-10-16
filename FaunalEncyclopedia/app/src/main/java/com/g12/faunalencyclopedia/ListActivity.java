@@ -23,7 +23,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author UID:u7630167 Name: Yihang Zhu
+ */
 public class ListActivity extends AppCompatActivity {
     private SearchView searchView;
     private  AVLTree<Animal> animalTree;
@@ -35,8 +37,6 @@ public class ListActivity extends AppCompatActivity {
         System.out.println("Updating list");
         animalTree = DataHolder.getInstance().getDataset(); // Assign the dataset to animalTree
         List<String> animalNames = new ArrayList<>();
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        String email = mAuth.getCurrentUser().getEmail();
 
         animalTree.inorder(Animal -> {
             animalNames.add(Animal.getCommon_name());

@@ -1,7 +1,9 @@
 package com.g12.faunalencyclopedia.Data;
 
 import com.g12.faunalencyclopedia.Search.AVLTree;
-
+/**
+ * @author UID:u7630167 Name: Yihang Zhu
+ */
 public class DataHolder {
     private static final DataHolder ourInstance = new DataHolder();
 

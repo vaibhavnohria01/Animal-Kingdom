@@ -1,4 +1,4 @@
-# [G0 - Team Name] Report
+# [G12 - Team Name] Report
 
 The following is a report template to help your team successfully provide all the details necessary for your report in a structured and organised manner. Please give a straightforward and concise report that best demonstrates your project. Note that a good report will give a better impression of your project to the reviewers.
 
@@ -28,7 +28,7 @@ Note that you should have removed ALL TEMPLATE/INSTRUCTION textes in your submis
 10. [Conflict Resolution Protocol](#conflict-resolution-protocol)
 
 ## Administrative
-- Firebase Repository Link: <insert-link-to-firebase-repository>
+- Firebase Repository Link: https://console.firebase.google.com/project/faunalencyclopedia/overview
    - Confirm: I have already added comp21006442@gmail.com as a Developer to the Firebase project prior to due date.
 - Two user accounts for markers' access are usable on the app's APK (do not change the username and password unless there are exceptional circumstances. Note that they are not real e-mail addresses in use):
    - Username: comp2100@anu.edu.au	Password: comp2100
@@ -39,7 +39,7 @@ The key area(s) of responsibilities for each member
 
 | UID   |  Name  |   Role |
 |:------|:------:|-------:|
-| [uid] | [name] | [role] |
+| u7630167 | Yihang Zhu | Key Author |
 | [uid] | [name] | [role] |
 | [uid] | [name] | [role] |
 | [uid] | [name] | [role] |
@@ -62,11 +62,18 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 *Here is an example: (Note that you should remove the entire section (e.g. "others") if it is not applicable)*
 
-1. **UID1, Name1**  I have 30% contribution, as follows: <br>
+1. **u7630167, Yihang Zhu**  I have 40% contribution, as follows: <br>
   - **Code Contribution in the final App**
     - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
     - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
-    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
+    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... 
+    - Singleton Design Pattern - class DataHolder: [DataHolder.java](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/blob/main/FaunalEncyclopedia/app/src/main/java/com/g12/faunalencyclopedia/Data/DataHolder.java). The DataHolder class essentially is an AVL tree; in this app, all data are stored in a single tree, that is why I reckon that using the singleton design pattern to make sure each time the same tree will be called is an excellent idea. The idea of DataLoader-DataHolder comes from chatGPT. 
+    - Feature DataFile - class DataLoader: [DataLoader.java](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/blob/main/FaunalEncyclopedia/app/src/main/java/com/g12/faunalencyclopedia/Data/DataLoader.java), [datalist.json](https://console.firebase.google.com/project/faunalencyclopedia/storage/faunalencyclopedia.appspot.com/files/~2Fdata). The data comes from [data.gov](data.gov), contains information of more than 10,000 species. Each item will be loaded and stored as an Animal object, and all objects are put in an AVL tree by id in default. There is another data file [history](https://console.firebase.google.com/project/faunalencyclopedia/firestore/data/~2Fhistory~2Fcomp6442@anu.edu.au) that is stored in Firestore which records items been browsed by each users.
+    - Feature LoadShow Data: class LoginActivity: field [dataLoadingRunnable](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/blob/main/FaunalEncyclopedia/app/src/main/java/com/g12/faunalencyclopedia/LoginActivity.java#L40-71). It takes several seconds to fully load the data, which is unacceptable. Thus, the loading process has begin since the log in activity. Furthermore, I applied a handler and a runnable to accomplish the load show data part that we can browse the list before it has been fully loaded. Additionally, since the app loads data regularly, for each time we adjust the database, users can receive changes immediately. 
+    - Feature FB-Auth: class LoginActivity: [LogoutState.java](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/blob/main/FaunalEncyclopedia/app/src/main/java/com/g12/faunalencyclopedia/LogoutState.java)(refactored by Vaibhav). Using Firebase Authentication to do the sign in and sign up part. This is more convenient than implementing on our own.
+    - Feature FB-Persist: class HistoryActivity: [ContentActivity](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/blob/main/FaunalEncyclopedia/app/src/main/java/com/g12/faunalencyclopedia/ContentActivity.java#L70-88), [HistroyActivity.java](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/blob/main/FaunalEncyclopedia/app/src/main/java/com/g12/faunalencyclopedia/HistoryActivity.java). Each time a user chooses an item and go to the content page, the action will be recorded and sent to the firestore. Once they hit the "Histroy" button, the data from firestore will be loaded and showed. After hitting the "clear history" button, all data in firestore will be deleted and the list will be cleared immediately. Data of different users are separate.
+    - Not in the list of features but an interesting part: AI content [The AI package](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/tree/main/FaunalEncyclopedia/app/src/main/java/com/g12/faunalencyclopedia/AI).
+    - A part of the AVL tree: <br><br>
 
   - **Code and App Design** 
     - [What design patterns, data structures, did the involved member propose?]*
@@ -236,8 +243,7 @@ Feature Category: Firebase Integration <br>
 
 ### Surprised Features
 
-- If implemented, explain how your solution addresses the task (any detail requirements will be released with the surprised feature specifications).
-- State that "Suprised feature is not implemented" otherwise.
+Suprised feature is not implemented
 
 <br> <hr>
 

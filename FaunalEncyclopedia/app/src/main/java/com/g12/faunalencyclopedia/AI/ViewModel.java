@@ -17,8 +17,10 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-
+/**
+ * @author UID:u7630167 Name: Yihang Zhu
+ */
+// Reference:
 public class ViewModel extends androidx.lifecycle.ViewModel{
     private MutableLiveData<String> currentCharacter = new MutableLiveData<>();
     public void fetchResponse(String authorization, String prompt){
@@ -58,7 +60,7 @@ public class ViewModel extends androidx.lifecycle.ViewModel{
             }
         });
     }
-
+    // Imitate typing
     private void simulateRealtimeTyping(String chatGptResponse) {
         final char[] chars = chatGptResponse.toCharArray();
         final Handler handler = new Handler(Looper.getMainLooper());
