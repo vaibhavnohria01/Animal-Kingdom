@@ -17,7 +17,6 @@ import com.g12.faunalencyclopedia.R;
 
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -26,7 +25,6 @@ import org.junit.runner.RunWith;
 public class EspressoTest {
     @Before
     public void setUp() {
-        // Launch the activity under test using ActivityScenario
         ActivityScenario.launch(LoginActivity.class);
     }
 
