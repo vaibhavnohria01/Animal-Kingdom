@@ -35,7 +35,7 @@
             android:name=".ListActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".SplashActivityforintrovideo"
             android:screenOrientation="landscape"
             android:exported="true">
             <intent-filter>

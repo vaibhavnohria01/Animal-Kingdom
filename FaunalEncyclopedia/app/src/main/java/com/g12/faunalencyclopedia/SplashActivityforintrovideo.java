@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.VideoView;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivityforintrovideo extends AppCompatActivity {
 
     private VideoView videoView;
 
@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
         videoView.setVideoURI(videoUri);
         videoView.setOnCompletionListener(mp -> {
             // Video playback is complete; transition to the main activity
-            Intent intent = new Intent(SplashActivity.this, Homepage.class);
+            Intent intent = new Intent(SplashActivityforintrovideo.this, Homepage.class);
             startActivity(intent);
             finish(); // Finish the splash activity
         });
