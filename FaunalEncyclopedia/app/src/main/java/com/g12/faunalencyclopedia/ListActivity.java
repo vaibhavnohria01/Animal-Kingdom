@@ -64,16 +64,17 @@ public class ListActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
                 if (animalTree != null) { // Check if the tree is populated
                     filterList(s);
                 } else {
                     Toast.makeText(ListActivity.this, "The tree is empty. Please populate it first.", Toast.LENGTH_SHORT).show();
                 }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+
                 return false;
             }
         });
