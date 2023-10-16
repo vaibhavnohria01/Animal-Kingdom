@@ -17,7 +17,7 @@ public class SplashActivityforintrovideo extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         videoView = findViewById(R.id.videoView);
-        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.intro);
+        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.intro_video);
         videoView.setVideoURI(videoUri);
         videoView.setOnCompletionListener(mp -> {
             // Video playback is complete; transition to the main activity
