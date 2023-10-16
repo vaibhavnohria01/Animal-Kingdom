@@ -14,10 +14,15 @@ public class Homepage extends AppCompatActivity {
         setContentView(R.layout.activity_homepage);
 
         // Andrew: Button to go to the login page
+        Button button = findViewById(R.id.LoginButton);
         Button toLogin = findViewById(R.id.to_login);
 
-        toLogin.setOnClickListener(view -> {
+        button.setOnClickListener(view -> {
             Intent intent = new Intent(Homepage.this, LoginActivity.class);
+            startActivity(intent);
+        });
+        toLogin.setOnClickListener(view -> {
+            Intent intent = new Intent(Homepage.this, signup.class);
             startActivity(intent);
         });
     }

@@ -41,7 +41,7 @@
         android:layout_marginTop="14dp"
         android:layout_marginEnd="164dp"
         android:layout_marginBottom="34dp"
-        android:text="Button"
+        android:text="I am already registered!"
         app:layout_constraintBottom_toTopOf="@+id/to_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

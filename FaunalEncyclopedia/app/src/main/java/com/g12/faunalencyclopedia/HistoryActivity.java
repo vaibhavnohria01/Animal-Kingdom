@@ -100,7 +100,7 @@ public class HistoryActivity extends AppCompatActivity {
         Button buttonLogOut = findViewById(R.id.logOut);
         buttonLogOut.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
-            Intent intentToLogin = new Intent(HistoryActivity.this, LoginActivity.class);
+            Intent intentToLogin = new Intent(HistoryActivity.this, Homepage.class);
             startActivity(intentToLogin);
         });
     }
