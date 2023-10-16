@@ -30,7 +30,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-
+/**
+ * @author UID:u7630167 Name: Yihang Zhu
+ */
 public class ContentActivity extends AppCompatActivity {
     private ViewModel viewModel;
     private Handler handler = new Handler(Looper.getMainLooper());
@@ -55,12 +57,9 @@ public class ContentActivity extends AppCompatActivity {
         // Search data from the AVL tree
         Intent intent = getIntent();
         String animalName = intent.getStringExtra("ANIMAL");
-        //FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         Optional<Animal> targetAnimal = animals.get(animal -> animal.getCommon_name().equals(animalName));
-        /*Optional<Animal> targetAnimal = animals.stream()
-                .filter(animal -> animal.getCommon_name().equals(animalName))
-                .findFirst();*/
+
         if (targetAnimal.isPresent()) {
             Animal animal = targetAnimal.get();
             commonName.setText(animal.getCommon_name());
@@ -87,10 +86,6 @@ public class ContentActivity extends AppCompatActivity {
                             System.out.println("Error updating document: " + e.getMessage());
                         }
                     });
-
-
-
-
         }
 
         button.setOnClickListener(view -> {

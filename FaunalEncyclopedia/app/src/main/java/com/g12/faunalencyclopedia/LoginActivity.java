@@ -35,11 +35,13 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordField;
 
     private Authentication_state authState;
-
+    /**
+     * @author UID:u7630167 Name: Yihang Zhu
+     */
     // Andrew: Added a handler and a runnable to load data from Firebase
-    private static final long INTERVAL = 60000;
+    private static final long INTERVAL = 120000;
     private Handler dataLoadingHandler = new Handler();
-    private DataLoader dataLoader = new DataLoader(this);;
+    private DataLoader dataLoader = new DataLoader(this);
     private Runnable dataLoadingRunnable = new Runnable(){
 
         @Override

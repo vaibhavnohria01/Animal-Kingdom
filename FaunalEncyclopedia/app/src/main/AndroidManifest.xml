@@ -20,9 +20,6 @@
             android:name=".HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
             android:name=".signup"
             android:exported="false" />
         <activity

@@ -1,7 +1,9 @@
 package com.g12.faunalencyclopedia.Data;
 
 import java.util.List;
-
+/**
+ * @author UID:u7630167 Name: Yihang Zhu
+ */
 public class Animal implements java.io.Serializable{
     private String id;
     private String county;

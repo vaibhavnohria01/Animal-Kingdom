@@ -15,7 +15,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author UID:u7630167 Name: Yihang Zhu
+ */
 public class ListActivity extends AppCompatActivity {
     // Andrew: Updating the list view when the activity resumes
     @Override
@@ -24,8 +26,6 @@ public class ListActivity extends AppCompatActivity {
         System.out.println("Updating list");
         AVLTree<Animal> dataset = DataHolder.getInstance().getDataset();
         List<String> animalNames = new ArrayList<>();
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        String email = mAuth.getCurrentUser().getEmail();
 
         dataset.inorder(Animal -> {
             animalNames.add(Animal.getCommon_name());
@@ -37,7 +37,6 @@ public class ListActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
             Intent intentToContent = new Intent(ListActivity.this, ContentActivity.class);
-            //intentToContent.putExtra("EMAIL", email);
             intentToContent.putExtra("ANIMAL", animalNames.get(i));
             startActivity(intentToContent);
         });
@@ -52,7 +51,6 @@ public class ListActivity extends AppCompatActivity {
 
         bottomHistory.setOnClickListener(view -> {
             Intent intentToHistory = new Intent(ListActivity.this, HistoryActivity.class);
-            //intentToHistory.putExtra("EMAIL", email);
             startActivity(intentToHistory);
         });
     }
