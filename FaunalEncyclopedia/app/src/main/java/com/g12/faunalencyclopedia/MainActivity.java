@@ -1,17 +1,14 @@
 package com.g12.faunalencyclopedia;
 
 
-import static android.content.ContentValues.TAG;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,20 +16,16 @@ import com.g12.faunalencyclopedia.Data.Animal;
 import com.g12.faunalencyclopedia.Data.DataHolder;
 import com.g12.faunalencyclopedia.Data.DataLoader;
 import com.g12.faunalencyclopedia.Search.AVLTree;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     // Andrew: Added a handler and a runnable to load data from Firebase
     private static final long INTERVAL = 60000;
     private Handler dataLoadingHandler = new Handler();
-    private DataLoader dataLoader = new DataLoader(this);;
+    private DataLoader dataLoader = new DataLoader(this);
+
     private Runnable dataLoadingRunnable = new Runnable(){
 
         @Override
@@ -41,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             dataLoader.loadDataSet(new DataLoader.OnDataLoadedCallback() {
 
                 @Override
-                public void onSuccess(AVLTree<Animal> dataset) {
+                public void  onSuccess(AVLTree<Animal> dataset) {
                     System.out.println("Data loaded successfully");
                     DataHolder.getInstance().setDataset(dataset);
 
@@ -99,5 +92,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+    }
+    private void filterList(String text){
+        List<Animal> filterList = new ArrayList<>();
+
+        if(filterList.isEmpty()){
+            Toast.makeText(this,"No data found", Toast.LENGTH_SHORT).show();
+        }
     }
 }
