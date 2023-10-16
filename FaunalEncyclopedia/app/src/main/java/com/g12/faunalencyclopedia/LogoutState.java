@@ -18,19 +18,18 @@ public class LogoutState implements Authentication_state{
 
     @Override
     public void handling_login(String username, String password) {
-
+        /**
+         * @author UID:u7630167 Name: Yihang Zhu
+         */
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener((Activity) context, task -> {
             if (task.isSuccessful()) {
                 FirebaseUser user = mAuth.getCurrentUser();
                 Intent intent = new Intent(context, ListActivity.class);
-
-                intent.putExtra("EMAIL", user.getEmail());
                 context.startActivity(intent);
             } else {
                 Toast.makeText(context, "Email or password is incorrect.", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }

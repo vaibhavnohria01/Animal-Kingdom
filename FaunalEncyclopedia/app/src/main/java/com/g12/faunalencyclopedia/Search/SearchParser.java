@@ -19,8 +19,6 @@ public class SearchParser {
 
         if (token.startsWith("#")) {
             return parseHashtagQuery();
-        } else if (token.startsWith("$")) {
-            return parseDollarRangeQuery();
         } else {
             return parseWordQuery();
         }
@@ -30,14 +28,6 @@ public class SearchParser {
         String hashtag = tokens.get(index++);
         // Process the hashtag token, e.g., remove the '#' prefix
         return new HashtagQuery(hashtag.substring(1));
-    }
-
-    private Object parseDollarRangeQuery() {
-        String range = tokens.get(index++);
-        String[] parts = range.substring(1).split("-");
-        int start = Integer.parseInt(parts[0]);
-        int end = Integer.parseInt(parts[1]);
-        return new DollarRangeQuery(start, end);
     }
 
     private Object parseWordQuery() {

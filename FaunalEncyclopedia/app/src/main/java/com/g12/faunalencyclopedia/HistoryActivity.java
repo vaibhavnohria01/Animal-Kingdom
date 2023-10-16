@@ -18,7 +18,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * @author UID:u7630167 Name: Yihang Zhu
+ */
 public class HistoryActivity extends AppCompatActivity {
 
     @Override
@@ -39,7 +41,6 @@ public class HistoryActivity extends AppCompatActivity {
                     List<String> animalNames = new ArrayList<>();
                     for (Map.Entry<String, Object> record : document.getData().entrySet()){
                         String animalName = record.getKey();
-                        System.out.println("DocumentSnapshot data: " + animalName);
                         animalNames.add(animalName);
                     }
                     ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, animalNames);
@@ -84,7 +85,6 @@ public class HistoryActivity extends AppCompatActivity {
                     ListView listView = findViewById(R.id.listHistory);
                     ArrayAdapter adapter = (ArrayAdapter) listView.getAdapter();
                     adapter.clear();
-                    onResume();
                 }
             });
         });

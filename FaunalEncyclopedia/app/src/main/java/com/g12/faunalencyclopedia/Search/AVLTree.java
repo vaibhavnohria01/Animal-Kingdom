@@ -18,18 +18,6 @@ public class AVLTree<T> {
         this.comparator = comparator;
     }
 
-    // Andrew: The compare method
-    private int compare(T a, T b) {
-        if (comparator != null) {
-            return comparator.compare(a, b);
-        } else if (a instanceof Comparable) {
-            return ((Comparable<T>) a).compareTo(b);
-        } else {
-            throw new RuntimeException("Cannot compare objects. Neither a Comparator is provided, nor the objects are Comparable.");
-        }
-    }
-
-
     // Utility method to get the height of the tree
     private int height(AVLNode node) {
         if (node == null) return 0;
@@ -116,11 +104,24 @@ public class AVLTree<T> {
         return node;
     }
 
+    /**
+     * @author UID:u7630167 Name: Yihang Zhu
+     */
+    // Andrew: The compare method
+    private int compare(T a, T b) {
+        if (comparator != null) {
+            return comparator.compare(a, b);
+        } else if (a instanceof Comparable) {
+            return ((Comparable<T>) a).compareTo(b);
+        } else {
+            throw new RuntimeException("Cannot compare objects. Neither a Comparator is provided, nor the objects are Comparable.");
+        }
+    }
+
     // Andrew: Methods to traverse the tree
     public void inorder(Consumer<T> action) {
         inorderRec(root, action);
     }
-
     private void inorderRec(AVLNode<T> node, Consumer<T> action) {
         if (node != null) {
             inorderRec(node.left, action);
@@ -128,7 +129,6 @@ public class AVLTree<T> {
             inorderRec(node.right, action);
         }
     }
-
     public Optional<T> get(Predicate<T> condition) {
         AVLNode<T> foundNode = findInOrder(root, condition);
         return Optional.ofNullable(foundNode != null ? foundNode.data : null);
