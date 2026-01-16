@@ -19,3 +19,5 @@ app/build/
 *.jks
 *.keystore
 .gradle/
+.DS_Store
+
