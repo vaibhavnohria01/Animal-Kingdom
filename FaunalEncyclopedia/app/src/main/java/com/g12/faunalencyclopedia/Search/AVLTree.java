@@ -142,5 +142,4 @@ public class AVLTree<T> {
 
         return findInOrder(node.right, condition);
     }
-
 }

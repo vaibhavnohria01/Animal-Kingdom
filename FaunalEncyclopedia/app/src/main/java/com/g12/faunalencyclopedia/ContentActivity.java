@@ -94,9 +94,12 @@ public class ContentActivity extends AppCompatActivity {
             startActivity(intentBack);
         });
 
-        // Generate the content by AI
-        // Reference:
-        description.setText("Generating content...");
+         /*Generate the content by AI
+         Reference: ChatGPT:
+         Me: This is my simple project... (One AI project I have already implemented)
+         Me: Now I want to do the similar thing on Android Studio.
+         ChatGPT: Android does not allow synchronous network operations on the main thread,
+         so you'd typically use libraries like Retrofit or OkHttp to manage your HTTP requests...*/
         viewModel = new ViewModelProvider(this).get(ViewModel.class);
         viewModel.getCurrentCharacter().observe(this, response -> {
             charIndex = 0;
@@ -107,8 +110,6 @@ public class ContentActivity extends AppCompatActivity {
         String prompt = getString(ID, animalName);
         description.setText("");
         viewModel.fetchResponse(authorization, prompt);
-
-
     }
 
     private void simulateTypingEffect(final TextView textView, final String response) {
