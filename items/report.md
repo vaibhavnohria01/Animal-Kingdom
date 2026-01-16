@@ -64,37 +64,40 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 1. **u7630167, Yihang Zhu**  I have 40% contribution, as follows: <br>
   - **Code Contribution in the final App**
-    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
-    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
-    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... 
     - Singleton Design Pattern - class DataHolder: [DataHolder.java](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/blob/main/FaunalEncyclopedia/app/src/main/java/com/g12/faunalencyclopedia/Data/DataHolder.java). The DataHolder class essentially is an AVL tree; in this app, all data are stored in a single tree, that is why I reckon that using the singleton design pattern to make sure each time the same tree will be called is an excellent idea. The idea of DataLoader-DataHolder comes from chatGPT. 
     - Feature DataFile - class DataLoader: [DataLoader.java](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/blob/main/FaunalEncyclopedia/app/src/main/java/com/g12/faunalencyclopedia/Data/DataLoader.java), [datalist.json](https://console.firebase.google.com/project/faunalencyclopedia/storage/faunalencyclopedia.appspot.com/files/~2Fdata). The data comes from [data.gov](data.gov), contains information of more than 10,000 species. Each item will be loaded and stored as an Animal object, and all objects are put in an AVL tree by id in default. There is another data file [history](https://console.firebase.google.com/project/faunalencyclopedia/firestore/data/~2Fhistory~2Fcomp6442@anu.edu.au) that is stored in Firestore which records items been browsed by each users.
-    - Feature LoadShow Data: class LoginActivity: field [dataLoadingRunnable](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/blob/main/FaunalEncyclopedia/app/src/main/java/com/g12/faunalencyclopedia/LoginActivity.java#L40-71). It takes several seconds to fully load the data, which is unacceptable. Thus, the loading process has begin since the log in activity. Furthermore, I applied a handler and a runnable to accomplish the load show data part that we can browse the list before it has been fully loaded. Additionally, since the app loads data regularly, for each time we adjust the database, users can receive changes immediately. 
+    - Feature LoadShow Data: class LoginActivity: field [dataLoadingRunnable](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/blob/main/FaunalEncyclopedia/app/src/main/java/com/g12/faunalencyclopedia/LoginActivity.java#L40-71). It takes some time to fully load the data, which is unacceptable. Thus, the loading process has begin since the log in activity. Furthermore, I applied a handler and a runnable to accomplish the load show data part that we can browse the list before it has been fully loaded. Additionally, since the app loads data regularly, for each time we adjust the database, users can receive changes immediately. 
     - Feature FB-Auth: class LoginActivity: [LogoutState.java](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/blob/main/FaunalEncyclopedia/app/src/main/java/com/g12/faunalencyclopedia/LogoutState.java)(refactored by Vaibhav). Using Firebase Authentication to do the sign in and sign up part. This is more convenient than implementing on our own.
     - Feature FB-Persist: class HistoryActivity: [ContentActivity](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/blob/main/FaunalEncyclopedia/app/src/main/java/com/g12/faunalencyclopedia/ContentActivity.java#L70-88), [HistroyActivity.java](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/blob/main/FaunalEncyclopedia/app/src/main/java/com/g12/faunalencyclopedia/HistoryActivity.java). Each time a user chooses an item and go to the content page, the action will be recorded and sent to the firestore. Once they hit the "Histroy" button, the data from firestore will be loaded and showed. After hitting the "clear history" button, all data in firestore will be deleted and the list will be cleared immediately. Data of different users are separate.
-    - Not in the list of features but an interesting part: AI content [The AI package](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/tree/main/FaunalEncyclopedia/app/src/main/java/com/g12/faunalencyclopedia/AI).
-    - A part of the AVL tree: <br><br>
+    - Not in the list of features but an interesting part: AI content [The AI package](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/tree/main/FaunalEncyclopedia/app/src/main/java/com/g12/faunalencyclopedia/AI). The introductory text of each item is generated by AI. With the help of an API it is not really hard to implement, but it looks really cool.
+    - A part of the AVL tree: [AVLTree.java](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/blob/main/FaunalEncyclopedia/app/src/main/java/com/g12/faunalencyclopedia/Search/AVLTree.java#107-144). Andy commpleted the AVL tree yet did not know how to collaborate with data, I did that.
+    - Refactor code: I also improved code from others, with comments.<br><br>
 
   - **Code and App Design** 
-    - [What design patterns, data structures, did the involved member propose?]*
-    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
+    - As mentioned before, I implemented the singleton design pattern on the DataHolder class.
+    - I designed the main part of the app, i.e. ListActivity [activity_list.xml](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/blob/main/FaunalEncyclopedia/app/src/main/res/layout/activity_list.xml), ContentActivity [activity_content.xml](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/blob/main/FaunalEncyclopedia/app/src/main/res/layout/activity_content.xml), and HistoryActivity [activity_history.xml](https://gitlab.cecs.anu.edu.au/u7630167/ga-23s2/-/blob/main/FaunalEncyclopedia/app/src/main/res/layout/activity_history.xml). I did not utilised tools despite Android Studio itself. Thus, the UI is rather rudimentary and dirty.<br><br>
 
   - **Others**: (only if significant and significantly different from an "average contribution") 
     - [Report Writing?] [Slides preparation?]*
-    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
+    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* 
+    - I am responsible for the firebase.<br><br>
 
 2. **UID2, Name2**  I have xx% contribution, as follows: <br>
-  - ...
-
+- **Code Contribution in the final App**
+   - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
+    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
+    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... 
+- **Code and App Design** 
+   - [What design patterns, data structures, did the involved member propose?]*
+   - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* 
+- **Others**: (only if significant and significantly different from an "average contribution") 
+    - I wrote the Application Description of the report.
+    - I am responsible for the firebase.<br><br>
 
 
 ## Application Description
 
-*[What is your application, what does it do? Include photos or diagrams if necessary]*
-
-*Here is a pet specific application example*
-
-*PetBook is a social media application specifically targetting pet owners... it provides... certified practitioners, such as veterians are indicated by a label next to their profile...*
+Faunal Encyclopedia is an application for biological savvies. Within such an application, users can search for species they want based on common names, scientific names, and so on. Besides basic information, there is also an introductory text about the species that is generated by AI.
 
 ### Application Use Cases and or Examples
 
